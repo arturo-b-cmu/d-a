@@ -6,7 +6,6 @@ struct MyDyanamicArray {
     //member variables belong to the struct
         //default c++ structs are public, change to private to prevent modification
     private: 
-
     //the initial capacity - grow dynamically from here
     static const int MAX_ENTRIES = 1; 
 
@@ -59,7 +58,25 @@ struct MyDyanamicArray {
         }
     }
 
-    private:
+    void removeLast() {
+        if (theSize == 0) {
+            throw out_of_range("Cannot remove from an empty Dynamic Array.");
+        }
+        --theSize;
+    }
+
+    bool findNum (int num) const{
+        for (int i=0; i < theSize; i++){
+            if (fixedSizeArray[i] == num) {
+                return true; 
+            } 
+        }
+        return false; 
+    }
+
+
+
+    public:
     void growIfFull(){
         if (theSize >= capacity) {
             int newCapacity = 2*capacity;
@@ -77,12 +94,20 @@ struct MyDyanamicArray {
     }
 
     public:
-    void removeLast() {
-        if (theSize == 0) {
-            throw out_of_range("Cannot remove from an empty Dynamic Array.");
+
+    bool removeElement (int num) {
+        for (int i=0; i < theSize; i++) {
+            if (fixedSizeArray[i] == num) {
+                for (int j = i; j < theSize - 1; j++) {
+                    fixedSizeArray[j] = fixedSizeArray[j + 1];
+                }
+                theSize--;
+                return true;
+            }
         }
-        --theSize;
+        return false;
     }
+
     
 };
 
@@ -94,10 +119,10 @@ int main () {
     MyDyanamicArray array_Dynamic; 
 
     //is the dynamic array empty?
-    cout << "Returns: " << array_Dynamic.empty() << " if the array is empty" << endl;
+    cout << "\nReturns: " << array_Dynamic.empty() << " if the array is empty" << endl;
     //cout << array_Dynamic.size() << endl;
 
-    //cout << array_Dynamic.get(99) << endl;
+    //cout << array_Dynamic.get(2) << endl;
 
     array_Dynamic.printElements();
     cout << "\nAdding new element...\n";
@@ -125,10 +150,24 @@ int main () {
     array_Dynamic.addToBack(num4);
     array_Dynamic.printElements();
 
+    array_Dynamic.printElements();
+    cout << "\nAdding new element...\n";
+    int num5 = 3;
+    array_Dynamic.addToBack(num5);
+    array_Dynamic.printElements();
+
 
     //testing remove last function
     cout << "\nRemoving last element...\n";
     array_Dynamic.removeLast();
+    array_Dynamic.printElements();
+
+    cout << "\nFinding elment '20'..." << array_Dynamic.findNum(20) << " \n";
+
+    cout << "\nRemoving element '5' and shifting array" << array_Dynamic.removeElement(5);
+
+    //printing new array
+    cout << "\nPrinting New array...\n";
     array_Dynamic.printElements();
 
 }
