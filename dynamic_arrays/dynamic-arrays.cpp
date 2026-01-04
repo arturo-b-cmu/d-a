@@ -5,6 +5,14 @@ using namespace std;
 struct MyDyanamicArray {
     //member variables belong to the struct
         //default c++ structs are public, change to private to prevent modification
+    
+    
+    //Building Blocks of a dynamic array
+        // 1. a pointer to a fixed size array, used here as the basis
+        // 2. current number of elements in the dynamic array
+        // 3. current capacity (max cap) of the dynamic arr
+
+    //private is used to prevent external code from directly modifying size, capacity, or fixedSizeArray
     private: 
     //the initial capacity - grow dynamically from here
     static const int MAX_ENTRIES = 1; 
