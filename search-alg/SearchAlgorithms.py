@@ -2,12 +2,10 @@
     #O(n) (worst case) Time complexity dependent on the size of lst or 'n'
 def linearSearch(lst, target):
     for i in range(len(lst)):
-        if lst[i] == target:
+        if lst[i] == target: #the intrinsic operation is the comparision
             return True
     return False
-
-
-print(linearSearch((1,6,2,7), 4))
+        
 
 
 def recursiveLS(lst, target): #worst case O(n)^2
